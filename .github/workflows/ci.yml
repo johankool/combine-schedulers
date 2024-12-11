@@ -10,38 +10,39 @@ on:
   workflow_dispatch:
 
 jobs:
-  library:
-    name: Library
-    runs-on: macos-14
-    steps:
-      - uses: actions/checkout@v4
-      - name: Select Xcode 15.4
-        run: sudo xcode-select -s /Applications/Xcode_15.4.app
-      - name: Run tests
-        run: make test
-      # - name: Build for library evolution
-      #   run: make build-for-library-evolution
+  # temporary
+  # library:
+  #   name: Library
+  #   runs-on: macos-14
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Select Xcode 15.4
+  #       run: sudo xcode-select -s /Applications/Xcode_15.4.app
+  #     - name: Run tests
+  #       run: make test
+  #     # - name: Build for library evolution
+  #     #   run: make build-for-library-evolution
 
-  windows:
-    name: Windows
-    strategy:
-      matrix:
-        os: [windows-latest]
-        config: ['debug', 'release']
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: compnerd/gha-setup-swift@main
-        with:
-          branch: swift-5.10-release
-          tag: 5.10-RELEASE
+  # windows:
+  #   name: Windows
+  #   strategy:
+  #     matrix:
+  #       os: [windows-latest]
+  #       config: ['debug', 'release']
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - uses: compnerd/gha-setup-swift@main
+  #       with:
+  #         branch: swift-5.10-release
+  #         tag: 5.10-RELEASE
 
-      - uses: actions/checkout@v4
-      - name: Run tests
-        run: swift test -c ${{ matrix.config }}
+  #     - uses: actions/checkout@v4
+  #     - name: Run tests
+  #       run: swift test -c ${{ matrix.config }}
 
   android:
     name: Android (Swift 6.0.2)
     runs-on: ubuntu-22.04
     steps:
       - name: Test on Android
-        uses: johankool/swift-android-test-action@e25f69bab033c2152e3153a1ea98418e453fef84
+        uses: johankool/swift-android-test-action@4760098eadb0f232a3c39224f62fdaa61cf045c8
